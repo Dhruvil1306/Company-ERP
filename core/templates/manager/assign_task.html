@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Assign Task{% endblock %}
+
+{% block content %}
+<h2>Assign Task for {{ team.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Task Title:</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Description:</label>
+        <textarea name="description" class="form-control" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Assign Task</button>
+</form>
+
+<h4 class="mt-4">Team Members</h4>
+<ul>
+    {% for member in members %}
+        <li>{{ member.first_name }} {{ member.last_name }} ({{ member.username }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

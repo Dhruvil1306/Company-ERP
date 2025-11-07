@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Manager Dashboard{% endblock %}
+
+{% block content %}
+<h2>Manager Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">👥 Total Team Members</div>
+            <div class="card-body">
+                <h3>{{ total_team_members }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">📊 Total Tasks Assigned</div>
+            <div class="card-body">
+                <h3>{{ total_reports }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>My Teams</h3>
+<ul>
+    {% for team in teams %}
+        <li>
+            {{ team.name }} - Members: {{ team.members.count }}
+            <a href="{% url 'assign_task' team.id %}" class="btn btn-sm btn-primary">Assign Task</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

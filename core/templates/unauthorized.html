@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Unauthorized{% endblock %}
+{% block content %}
+<div class="alert alert-danger">
+  <h4>🚫 Unauthorized Access</h4>
+  <p>You don’t have permission to view this page.</p>
+  <a href="javascript:history.back()" class="btn btn-secondary mt-2">Go Back</a>
+</div>
+{% endblock %}

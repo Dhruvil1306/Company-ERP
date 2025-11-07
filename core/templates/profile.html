@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2>My Profile</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ user.username }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Password (leave blank to keep current):</label>
+        <input type="password" name="password" class="form-control">
+    </div>
+
+    {% if employee %}
+    <div class="mb-3">
+        <label>Department:</label>
+        <input type="text" name="department" value="{{ employee.department }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ employee.designation }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label>Contact Number:</label>
+        <input type="text" name="contact_number" value="{{ employee.contact_number }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label>Photo:</label>
+        <input type="file" name="photo" class="form-control">
+        {% if employee.photo %}
+            <img src="{{ employee.photo.url }}" width="100" class="mt-2">
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-success">💾 Save</button>
+</form>
+{% endblock %}

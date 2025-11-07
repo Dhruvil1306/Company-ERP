@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<h2>Manage Users</h2>
+
+<a href="{% url 'add_user' %}" class="btn btn-primary mb-3">➕ Add New User</a>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Employee ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                {% if u.employee %}
+                    {{ u.employee.full_name }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if u.employee %}
+                    {{ u.employee.employee_id }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.get_role_display }}</td>
+            <td>
+                <a href="{% url 'edit_user' u.id %}" class="btn btn-sm btn-warning">✏️ Edit</a>
+                <a href="{% url 'delete_user' u.id %}" class="btn btn-sm btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this user?');">
+                   🗑️ Delete
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">No users found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

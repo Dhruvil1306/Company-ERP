@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}ERP System{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 230px;
+      background: #343a40;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+    }
+    .sidebar a {
+      color: #ccc;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: block;
+    }
+    .sidebar a:hover {
+      background: #495057;
+      color: #fff;
+    }
+    .sidebar .role-header {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 10px 0 5px 20px;
+      color: #999;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h5 class="text-center mb-4">🏢 ERP System</h5>
+
+    {% if user.is_authenticated %}
+      <div class="px-3 mb-3">
+        <strong>{{ user.username }}</strong><br>
+        <small>{{ user.get_role_display }}</small>
+      </div>
+
+      <a href="{% url 'profile' %}">👤 Profile</a>
+
+      <a href="{% url 'logout' %}">🚪 Logout</a>
+      <hr style="border-color:#555;">
+
+      {% if user.role == 'admin' %}
+        <div class="role-header">Admin Menu</div>
+        <a href="{% url 'admin_dashboard' %}">🏠 Dashboard</a>
+        <a href="{% url 'manage_users' %}">⚙️ Manage Users</a>
+        <a href="{% url 'admin_reports' %}">📊 Reports</a>
+
+      
+
+
+      {% elif user.role == 'hr' %}
+        <div class="role-header">HR Menu</div>
+        <a href="{% url 'hr_dashboard' %}">🏠 Dashboard</a>
+        <a href="{% url 'manage_employees' %}">👥 Employees</a>
+        <a href="{% url 'manage_payrolls' %}">💰 Payroll</a>
+
+      {% elif user.role == 'head_hr' %}
+        <div class="role-header">Head HR Menu</div>
+        <a href="{% url 'head_hr_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📈 HR Reports</a>
+
+      {% elif user.role == 'manager' %}
+        <div class="role-header">Manager Menu</div>
+        <a href="{% url 'manager_dashboard' %}">🏠 Dashboard</a>
+        <a href="{% url 'manager_tasks' %}">📋 Tasks</a>
+
+      {% elif user.role == 'head_manager' %}
+        <div class="role-header">Head Manager Menu</div>
+        <a href="{% url 'head_manager_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📊 Team Reports</a>
+
+      {% elif user.role == 'sales' %}
+        <div class="role-header">Sales Menu</div>
+        <a href="{% url 'sales_dashboard' %}">🏠 Dashboard</a>
+        <a href="{% url 'sales_leads' %}">💼 Leads</a>
+
+
+      {% elif user.role == 'head_sales' %}
+        <div class="role-header">Head Sales Menu</div>
+        <a href="{% url 'head_sales_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📈 Sales Reports</a>
+
+      {% elif user.role == 'support' %}
+        <div class="role-header">Support Menu</div>
+        <a href="{% url 'support_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📞 Tickets</a>
+
+      {% elif user.role == 'head_support' %}
+        <div class="role-header">Head Support Menu</div>
+        <a href="{% url 'head_support_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📊 Support Reports</a>
+
+      {% elif user.role == 'tech' %}
+        <div class="role-header">Technician Menu</div>
+        <a href="{% url 'tech_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">🧰 Jobs</a>
+
+      {% elif user.role == 'head_tech' %}
+        <div class="role-header">Head Tech Menu</div>
+        <a href="{% url 'head_tech_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📈 Maintenance Logs</a>
+
+      {% elif user.role == 'account' %}
+        <div class="role-header">Account Menu</div>
+        <a href="{% url 'account_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">💳 Transactions</a>
+
+      {% elif user.role == 'head_account' %}
+        <div class="role-header">Head Account Menu</div>
+        <a href="{% url 'head_account_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📊 Financial Reports</a>
+
+      {% elif user.role == 'customer' %}
+        <div class="role-header">Customer Menu</div>
+        <a href="{% url 'customer_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">🧾 Invoices</a>
+
+      {% elif user.role == 'head_customer' %}
+        <div class="role-header">Head Customer Menu</div>
+        <a href="{% url 'head_customer_dashboard' %}">🏠 Dashboard</a>
+        <a href="#">📊 Feedback Reports</a>
+
+      {% endif %}
+    {% else %}
+      <div class="px-3">Not logged in</div>
+    {% endif %}
+  </div>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+<h2>Tasks for My Teams</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Team</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.team.name }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No tasks assigned yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{% if employee %}Edit{% else %}Add{% endif %} Employee{% endblock %}
+
+{% block content %}
+<h2>{% if employee %}Edit{% else %}Add{% endif %} Employee</h2>
+
+{% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ employee_form.as_p }}
+    <button type="submit" class="btn btn-success">💾 Save</button>
+</form>
+
+{% endblock %}

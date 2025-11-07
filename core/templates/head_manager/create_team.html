@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Create Team{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Create Team</h2>
+
+    <!-- Display error or success messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Team Name -->
+        <div class="mb-3">
+            <label for="team_name" class="form-label">Team Name:</label>
+            <input type="text" name="team_name" id="team_name" class="form-control" required>
+        </div>
+
+        <!-- Select Employees -->
+        <div class="mb-3">
+            <label for="members" class="form-label">Select Employees:</label>
+            <select name="members" id="members" class="form-control" multiple required>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}">
+                        {{ employee.username }} ({{ employee.first_name }} {{ employee.last_name }})
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">
+                Hold Ctrl (Windows) or Cmd (Mac) to select multiple employees.
+            </small>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">💾 Create Team</button>
+    </form>
+</div>
+{% endblock %}

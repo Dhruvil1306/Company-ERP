@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Admin Reports{% endblock %}
+
+{% block content %}
+<h2>📊 Admin Reports</h2>
+
+<div class="card p-3 mb-3">
+    <p>Total Employees: {{ total_employees }}</p>
+    <p>Total Payroll Records: {{ total_payrolls }}</p>
+    <p>Total Salary Paid: ₹{{ total_salary }}</p>
+</div>
+{% endblock %}

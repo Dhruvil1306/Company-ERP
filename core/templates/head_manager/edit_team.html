@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Edit Team{% endblock %}
+
+{% block content %}
+<h2>Edit Team: {{ team.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Team Name:</label>
+        <input type="text" name="team_name" value="{{ team.name }}" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Select Managers:</label>
+        <select name="managers" class="form-control" multiple required>
+            {% for manager in managers %}
+                <option value="{{ manager.id }}" {% if manager in team.managers.all %}selected{% endif %}>
+                    {{ manager.first_name }} {{ manager.last_name }}
+                </option>
+            {% endfor %}
+        </select>
+        <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple managers.</small>
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Save Changes</button>
+</form>
+{% endblock %}

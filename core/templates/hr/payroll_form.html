@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{% if payroll %}Edit{% else %}Add{% endif %} Payroll{% endblock %}
+
+{% block content %}
+<h2>{% if payroll %}Edit{% else %}Add{% endif %} Payroll</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Employee:</label>
+        <select name="employee" class="form-control" required>
+            {% for emp in employees %}
+                <option value="{{ emp.id }}" {% if payroll and payroll.employee.id == emp.id %}selected{% endif %}>
+                    {{ emp.employee_id }} - {{ emp.user.username }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Month:</label>
+        <input type="text" name="month" value="{{ payroll.month|default:'' }}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Year:</label>
+        <input type="number" name="year" value="{{ payroll.year|default:'' }}" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">💾 Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Sales Dashboard{% endblock %}
+
+{% block content %}
+<h2>Sales Dashboard</h2>
+
+<div class="row mt-4">
+    <!-- Total Leads -->
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">📋 Total Leads</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ total_leads }}</h3>
+                <p class="card-text">All leads assigned to you.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Open Leads -->
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">🟢 Open Leads</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ open_leads }}</h3>
+                <p class="card-text">Leads that are still open.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Closed Leads -->
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">✅ Closed Leads</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ closed_leads }}</h3>
+                <p class="card-text">Leads that have been closed.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Quick Actions</h4>
+    <ul>
+        <li><a href="{% url 'add_lead' %}">➕ Add New Lead</a></li>
+        <li><a href="{% url 'sales_leads_list' %}">📋 View All Leads</a></li>
+    </ul>
+</div>
+{% endblock %}

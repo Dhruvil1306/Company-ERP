@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Manage Teams{% endblock %}
+
+{% block content %}
+<h2>My Teams</h2>
+
+<a href="{% url 'create_team' %}" class="btn btn-primary mb-3">➕ Create New Team</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Team Name</th>
+            <th>Managers</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in teams %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ team.name }}</td>
+            <td>
+                {% for manager in team.managers.all %}
+                    {{ manager.first_name }} {{ manager.last_name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    No manager assigned
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'edit_team' team.id %}" class="btn btn-sm btn-warning">✏️ Edit</a>
+                <a href="{% url 'delete_team' team.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">🗑️ Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No teams created yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

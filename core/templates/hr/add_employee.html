@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Add Employee{% endblock %}
+
+{% block content %}
+<h2>Add Employee</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>User:</label>
+        <select name="user_id" class="form-control" required>
+            {% for u in users %}
+                <option value="{{ u.id }}">{{ u.username }} ({{ u.get_role_display }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Department:</label>
+        <input type="text" name="department" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Designation:</label>
+        <input type="text" name="designation" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Contact Number:</label>
+        <input type="text" name="contact_number" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Date of Joining:</label>
+        <input type="date" name="date_of_joining" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Photo:</label>
+        <input type="file" name="photo" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label>Basic Salary:</label>
+        <input type="number" step="0.01" name="basic_salary" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Employee ID (Auto-generated):</label>
+        <input type="text" name="employee_id" class="form-control" disabled placeholder="Generated on save">
+    </div>
+
+    <button type="submit" class="btn btn-success">➕ Add Employee</button>
+    <a href="{% url 'manage_users' %}" class="btn btn-secondary">⬅️ Back</a>
+</form>
+{% endblock %}

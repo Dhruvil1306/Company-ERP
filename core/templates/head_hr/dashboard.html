@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Head HR Dashboard{% endblock %}
+
+{% block content %}
+<h2>Head HR Dashboard</h2>
+
+<div class="row mt-4">
+    <!-- Total Employees -->
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">👥 Total Employees</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ total_employees }}</h3>
+                <p class="card-text">All employees in the company.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payrolls -->
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">💰 Payrolls</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ total_payrolls }}</h3>
+                <p class="card-text">Payrolls generated this month.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">📈 HR Reports</div>
+            <div class="card-body">
+                <h3 class="card-title">{{ total_reports }}</h3>
+                <p class="card-text">Pending HR reports.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Quick Links</h4>
+    <ul>
+        <li><a href="{% url 'manage_employees' %}">👥 Manage Employees</a></li>
+        <li><a href="{% url 'manage_payrolls' %}">💰 Manage Payrolls</a></li>
+        <li><a href="#">📊 HR Reports</a></li>
+    </ul>
+</div>
+{% endblock %}

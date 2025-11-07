@@ -1,0 +1,31 @@
+<!-- templates/sales/add_lead.html -->
+{% extends "base.html" %}
+{% block title %}Add Lead{% endblock %}
+
+{% block content %}
+<h2>Add New Lead</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name:</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Email:</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Phone:</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Status:</label>
+        <select name="status" class="form-control">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">💾 Add Lead</button>
+</form>
+{% endblock %}
